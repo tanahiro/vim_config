@@ -38,9 +38,7 @@
 set background=light
 hi clear
 
-if has("gui_running")
-  set t_Co
-else
+if !has("gui_running")
   set t_Co=256
 end
 
@@ -168,7 +166,7 @@ call <SID>set_clr("Identifier", 6, s:bg, "NONE")
 call <SID>set_clr("Statement",  3, s:bg, "NONE")
 call <SID>set_clr("PreProc",    5, s:bg, "NONE")
 call <SID>set_clr("Type",       2, s:bg, "NONE")
-call <SID>set_clr("Special",    5, s:bg, "bold")
+call <SID>set_clr("Special",    5, s:bg, "NONE")
 call <SID>set_clr("Underlined", 5, s:bg, "underline")
 call <SID>set_clr("Ignore",     7, s:bg, "NONE")
 call <SID>set_clr("Error",      7, 9,    "bold")
