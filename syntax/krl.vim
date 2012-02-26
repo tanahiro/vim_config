@@ -5,6 +5,13 @@
 
 scriptencoding utf-8
 
+"" folding
+if has("folding")
+  set foldmarker=FOLD,ENDFOLD
+  set foldmethod=marker
+endif
+
+
 "" keyword
 syntax keyword KRLFunction     INI
 
