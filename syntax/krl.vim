@@ -56,7 +56,7 @@ syntax match KRLFoldBegin  display ";FOLD"
 syntax match KRLFoldEnd    display ";ENDFOLD"
 
 "" string
-syntax match KRLString      display "\".*\""
+syntax region KRLString      display start=+"+ end=+"+
 
 hi def link KRLComment      Comment
 
