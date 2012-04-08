@@ -259,4 +259,3 @@ call <SID>set_clr("Conceal",     7,   242,  "NONE")
 call <SID>set_clr("SignColumn",  4,   248,  "NONE")
 
 " vim: foldmethod=marker
-

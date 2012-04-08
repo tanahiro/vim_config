@@ -4,11 +4,12 @@
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"" pathogen
+"" pathogen {{{
 "" 'runtimepath' is modified to include ~/.vim/bundle/*
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 filetype plugin on
+" }}}
 
 "" encoding
 set encoding=utf-8
@@ -173,19 +174,18 @@ augroup END
 "" set clipbaord
 set clipboard+=unnamed
 
-"" Mac ClipBoard
+"" Mac ClipBoard {{{
 if has('unix')
   vmap <silent> sy :!pbcopy; pbpaste<CR>
   map <silent> sp <esc>o<esc>v:!pbpaste<CR>
 endif
+" }}}
 
 
 "" vimwiki {{{
-if isdirectory(expand('~/Dropbox/'))
-  let g:vimwiki_list = 
-        \[{'path':'~/Dropbox/vimwiki/', 'path_html':'~/Dropbox/vimwiki_html/'}]
-endif
-" Toggle list itme on/off
+"" path is defined in after/plugin/vimwiki.vim
+
+" Toggle list item on/off
 map <leader>tt <Plug>VimwikiToggleListItem
 nmap <leader>wh <Plug>VimwikiAll2HTML
 noremap <Plug>VimwikiAll2HTML :VimwikiAll2HTML<CR>

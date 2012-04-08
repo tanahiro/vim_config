@@ -20,7 +20,7 @@ elseif has ('gui_gtk2')
 endif
 "}}}
 
-"" window size {{{
+"" window {{{
 set columns=80
 if has('gui_macvim')
   set lines=55
@@ -31,6 +31,12 @@ set cmdheight=1
 
 "" toolbar
 set guioptions-=T
+
+"" color
+colorscheme tanahiro
+
+"" transparency
+set transparency=8
 
 "" }}}
 
@@ -44,6 +50,11 @@ if has('multi_byte_ime') || has('xim')
   "" do not keep the state of IME in insert mode
   "inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 endif
+if has('gui_macvim')
+  set iminsert
+  set noimdisableactivate
+endif
+
 "" }}}
 
 "" mouse {{{
@@ -57,17 +68,13 @@ set nomousehide
 "" visual bell
 set vb t_vb=
 
-if has('gui_macvim')
-  set noimdisableactivate
-endif
-
-"---------------------------------------------------------------------------
-"" read gvimrc_local.vim if available
+"" gvimrc_local.vim  {{{
 if 1 && filereadable($VIM . '/gvimrc_local.vim')
   source $VIM/gvimrc_local.vim
   if exists('g:gvimrc_local_finish') && g:gvimrc_local_finish != 0
     finish
   endif
 endif
+" }}}
 
 " vim: fileencoding=utf-8 foldmethod=marker
