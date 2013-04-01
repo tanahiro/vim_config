@@ -22,7 +22,7 @@ syntax keyword KRLMotion       SPLINE SCIRC SLIN SPL
 
 syntax keyword KRLProgramExec  CONTINUE EXIT FOR ENDFOR GOTO HALT IF THEN ENDIF
 syntax keyword KRLProgramExec  LOOP ENDLOOP REPEAT UNTIL SWITCH CASE ENDSWITCH
-syntax keyword KRLProgramExec  WAIT FOR SEC WHILE ENDWHILE
+syntax keyword KRLProgramExec  WAIT FOR SEC WHILE ENDWHILE ELSE
 
 syntax keyword KRLIO           ANIN ANOUT DIGIN PULSE SIGNAL
 
@@ -41,7 +41,7 @@ syntax keyword KRLKeywords     CCLOSE CHANNEL CIODTL CONFIRM CONST COPEN
 syntax keyword KRLKeywords     CREAD CWRITE DEF DEFAULT DEFDAT DEFFCT
 syntax keyword KRLKeywords     E6AXIS E6POS END ENDDAT ENDFCT EXT EXTFCT FRAME
 syntax keyword KRLKeywords     GLOBAL MAXIMUM MINIMUM POS PRIO PUBLIC
-syntax keyword KRLKeywords     SREAD SWRITE REAL
+syntax keyword KRLKeywords     SREAD SWRITE REAL INT
 
 syntax keyword KRLKeywords     C_PTP C_DIS C_ORI C_VEL
 syntax keyword KRLKeywords     CA ON OFF DELAY
