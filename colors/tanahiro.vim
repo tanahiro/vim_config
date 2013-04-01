@@ -1,5 +1,13 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim color file
-" 
+" vim: foldmethod=marker
+"
+" Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
+" Last Change: 2013-04-01
+" License: Public Domain
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"" Hint {{{1
 " [attr-list]
 " bold, underline, reverse, italic, standout, (NONE)
 "
@@ -67,7 +75,7 @@ fun! <SID>set_clr(group, fg, bg, attr)
   "execute "hi ".a:group." guifg=".a:fg." guibg=".a:bg." gui=".a:attr
 endfun
 
-"" function set_clr{{{2
+"" function set_clr2{{{2
 fun! <SID>set_clr2(group, fg, bg, attr, guisp)
   let l:str = "hi ".a:group
   if a:fg != ""
@@ -158,17 +166,31 @@ fun! <SID>chclr(color_num)
 endfun
 
 "" Normal {{{1
-call <SID>set_clr("Normal",     0, s:bg, "NONE")
-call <SID>set_clr("Comment",    4, s:bg, "NONE")
-call <SID>set_clr("Constant",   2, s:bg, "NONE")
-call <SID>set_clr("String",     1, s:bg, "NONE")
-call <SID>set_clr("Identifier", 6, s:bg, "NONE")
-call <SID>set_clr("Statement",  3, s:bg, "NONE")
-call <SID>set_clr("PreProc",    5, s:bg, "NONE")
-call <SID>set_clr("Type",       2, s:bg, "NONE")
-call <SID>set_clr("Special",    5, s:bg, "NONE")
-call <SID>set_clr("Underlined", 5, s:bg, "underline")
-call <SID>set_clr("Ignore",     7, s:bg, "NONE")
+if has("gui_running")
+  call <SID>set_clr("Normal",     0, s:bg, "NONE")
+  call <SID>set_clr("Comment",    4, s:bg, "NONE")
+  call <SID>set_clr("Constant",   2, s:bg, "NONE")
+  call <SID>set_clr("String",     1, s:bg, "NONE")
+  call <SID>set_clr("Identifier", 6, s:bg, "NONE")
+  call <SID>set_clr("Statement",  3, s:bg, "NONE")
+  call <SID>set_clr("PreProc",    5, s:bg, "NONE")
+  call <SID>set_clr("Type",       2, s:bg, "NONE")
+  call <SID>set_clr("Special",    5, s:bg, "NONE")
+  call <SID>set_clr("Underlined", 5, s:bg, "underline")
+  call <SID>set_clr("Ignore",     7, s:bg, "NONE")
+else
+  call <SID>set_clr("Normal",     0, "NONE", "NONE")
+  call <SID>set_clr("Comment",    4, "NONE", "NONE")
+  call <SID>set_clr("Constant",   2, "NONE", "NONE")
+  call <SID>set_clr("String",     1, "NONE", "NONE")
+  call <SID>set_clr("Identifier", 6, "NONE", "NONE")
+  call <SID>set_clr("Statement",  3, "NONE", "NONE")
+  call <SID>set_clr("PreProc",    5, "NONE", "NONE")
+  call <SID>set_clr("Type",       2, "NONE", "NONE")
+  call <SID>set_clr("Special",    5, "NONE", "NONE")
+  call <SID>set_clr("Underlined", 5, "NONE", "underline")
+  call <SID>set_clr("Ignore",     7, "NONE", "NONE")
+endif
 call <SID>set_clr("Error",      7, 9,    "bold")
 call <SID>set_clr("Todo",       0, 11,   "NONE")
 
@@ -250,12 +272,14 @@ cal <SID>set_clr("PmenuThumb",  "", "",  "reverse")
 "" Other {{{1
 call <SID>set_clr("Directory",   4,   "",   "NONE")
 call <SID>set_clr("LineNr",      124, "",   "NONE")
-call <SID>set_clr("NonText",     27,  s:bg, "NONE")
 call <SID>set_clr("SpecialKey",  4,   "",   "NONE")
 call <SID>set_clr("Title",       5,   "",   "NONE")
 call <SID>set_clr("MatchParen",  "",  153,  "NONE")
 call <SID>set_clr("ColorColumn", "",  224,  "NONE")
 call <SID>set_clr("Conceal",     7,   242,  "NONE")
 call <SID>set_clr("SignColumn",  4,   248,  "NONE")
-
-" vim: foldmethod=marker
+if has("gui_running")
+  call <SID>set_clr("NonText",     27,  s:bg, "NONE")
+else
+  call <SID>set_clr("NonText",     27,  "", "NONE")
+endif
