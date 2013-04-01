@@ -1,6 +1,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " .vimrc
+" vim: fileencoding=utf-8 foldmethod=marker
 "
+" Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
+" Last Change: 2013-04-01
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -120,8 +123,8 @@ set shellslash
 "" program to always generate a file-name.
 set grepprg=grep\ -nH\ $*
 
-let g:Tex_DefaultTargetFormat = 'dvi'
-let g:Tex_FormatDependency_pdf = 'dvi, pdf'
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_FormatDependency_pdf = 'tex, pdf'
 let g:Tex_FormatDependency_ps = 'dvi, ps'
 if $TARGETOS == "MAC"
   let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
@@ -130,6 +133,7 @@ if $TARGETOS == "MAC"
   let g:Tex_ViewRule_pdf = "open -a preview"
 elseif $TARGETOS == "LINUX"
   let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
+  let g:Tex_CompileRule_pdf = 'pdflatex $*'
   let g:Tex_ViewRule_dvi = 'pxdvi'
   let g:Tex_BibtexFlavor = 'jbibtex'
   let g:Tex_ViewRule_pdf = 'acroread'
@@ -202,4 +206,3 @@ endfunction
 inoremap SYNTAXH <C-R>=Syntaxhighlighter()<CR><ESC>
 "" }}}
 
-" vim: fileencoding=utf-8 foldmethod=marker
