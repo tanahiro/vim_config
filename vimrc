@@ -9,8 +9,7 @@
 
 "" pathogen {{{
 "" 'runtimepath' is modified to include ~/.vim/bundle/*
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+execute pathogen#infect()
 filetype plugin on
 " }}}
 "" encoding {{{
