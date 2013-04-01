@@ -13,26 +13,17 @@ call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 filetype plugin on
 " }}}
-
-"" encoding
+"" encoding {{{
 set encoding=utf-8
-
+" }}}
+"" mode {{{
 "" Use Vim defaults
 set nocompatible
-
 "" read/write a .viminfo file, don't store more than 50 lines of registers
 set viminfo='20,<50
 "" keep 50 lines of command line history
 set history=50
-
-"" When editing a file, always jump to the last cursor position
-if has("autocmd")
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal! g'\"" |
-  \ endif
-endif
-
+" }}}
 "" indent {{{
 filetype indent on
 "" number of spaces that a <Tab> counts for
@@ -48,7 +39,6 @@ set smartindent
 "" number of spaces that a <Tab> counts for while editing
 set softtabstop=2
 "" }}}
-
 "" appearance {{{
 "" shows line number
 set nonumber
@@ -75,7 +65,6 @@ set ruler
 "" bell
 set visualbell t_vb=
 "" }}}
-
 "" edit {{{
 "" allows backspacing over everything in insert mode
 set backspace=2
@@ -88,31 +77,58 @@ set formatoptions+=mM
 "" does not use octal format
 set nrformats-=octal
 ""}}}
-
+"" color {{{
+"" Switch syntax highlighting on, when the terminal has colors
+"" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+  colorscheme tanahiro
+endif
+"" }}}
 "" other set options {{{
 "" seraches wrap around the end of the file
 set wrapscan
 "" do not make buckup file
 set nobackup
 ""}}}
-
-"" color {{{
-"" Switch syntax highlighting on, when the terminal has colors
-"" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
- syntax on
- set hlsearch
-  "" color setting
-  colorscheme tanahiro
-endif
-
-"" }}}
-
+"" move {{{
 "" up-down motion on wraped lines
 map <Up> gk
 map <Down> gj
 imap <Up> <Esc>gka
 imap <Down> <Esc>gja
+" }}}
+"" some convinient features {{{
+"" When editing a file, always jump to the last cursor position
+if has("autocmd")
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal! g'\"" |
+  \ endif
+endif
+" }}}
+"" vim -b : edit binary using xxd-format {{{
+augroup Binary
+  au!
+  au BufReadPre  *.bin let &bin=1
+  au BufReadPost *.bin if &bin | silent %!xxd -g 1
+  au BufReadPost *.bin set ft=xxd | endif
+  au BufWritePre *.bin if &bin | %!xxd -r
+  au BufWritePre *.bin endif
+  au BufWritePost *.bin if &bin | silent %!xxd -g 1
+  au BufWritePost *.bin set nomod | endif
+augroup END
+" }}}
+"" clipbaord {{{
+set clipboard+=unnamed
+"" Mac ClipBoard {{{
+if has('unix')
+  vmap <silent> sy :!pbcopy; pbpaste<CR>
+  map <silent> sp <esc>o<esc>v:!pbpaste<CR>
+endif
+" }}}
+" }}}
 
 "" vim-latex {{{
 let g:tex_flavor = "latex"
@@ -162,40 +178,14 @@ let g:Tex_IgnoreLevel = 13
 "" In text files, always limit the width of text to 78 characters
 au BufNewFile,BUfRead *.tex set textwidth=78
 "" }}}
-
-""vim -b : edit binary using xxd-format
-augroup Binary
-  au!
-  au BufReadPre  *.bin let &bin=1
-  au BufReadPost *.bin if &bin | silent %!xxd -g 1
-  au BufReadPost *.bin set ft=xxd | endif
-  au BufWritePre *.bin if &bin | %!xxd -r
-  au BufWritePre *.bin endif
-  au BufWritePost *.bin if &bin | silent %!xxd -g 1
-  au BufWritePost *.bin set nomod | endif
-augroup END
-
-"" set clipbaord
-set clipboard+=unnamed
-
-"" Mac ClipBoard {{{
-if has('unix')
-  vmap <silent> sy :!pbcopy; pbpaste<CR>
-  map <silent> sp <esc>o<esc>v:!pbpaste<CR>
-endif
-" }}}
-
-
 "" vimwiki {{{
 "" path is defined in after/plugin/vimwiki.vim
-
 " Toggle list item on/off
 map <leader>tt <Plug>VimwikiToggleListItem
 nmap <leader>wh <Plug>VimwikiAll2HTML
 noremap <Plug>VimwikiAll2HTML :VimwikiAll2HTML<CR>
 let g:vimwiki_folding = 1
 "" }}}
-
 "" syntaxhighlighter {{{
 function! Syntaxhighlighter()
   let s:javascript1="<script type=\"syntaxhighlighter\" class=\"brush: <++>\">"

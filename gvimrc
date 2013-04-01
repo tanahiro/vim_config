@@ -1,15 +1,16 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " .gvimrc
+" vim: fileencoding=utf-8 foldmethod=marker
 "
+" Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
+" Last Change: 2013-04-01
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" font {{{
 if has('win32')
-  set guifont=MS_Gothic:h10:cSHIFTJIS
-  set linespace=1
+  set guifont=Inconsolata:h11
+  set guifontwide=TakaoGothic:h11
 elseif has('gui_macvim')
-  "set guifont=Osaka-等幅:h11
-  "set guifont=Courier:h11
   set guifont=Inconsolata:h12
   set guifontwide=Takaoゴシック:h11
 elseif has('xfontset')
@@ -19,7 +20,6 @@ elseif has ('gui_gtk2')
   "set guifontwide=Takaoゴシック\ 11
 endif
 "}}}
-
 "" window {{{
 set columns=80
 if has('gui_macvim')
@@ -36,27 +36,11 @@ set guioptions-=T
 colorscheme tanahiro
 
 "" transparency
-set transparency=8
-
-"" }}}
-
-"" IME {{{
-if has('multi_byte_ime') || has('xim')
-  "set iminsert=0 imsearch=0
-  "" XIM input start key
-  "if has('xim') && has('GUI_GTK')
-  "  set imactivatekey=s-space
-  "endif
-  "" do not keep the state of IME in insert mode
-  "inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
-endif
 if has('gui_macvim')
-  set iminsert
-  set noimdisableactivate
+  set transparency=8
 endif
 
 "" }}}
-
 "" mouse {{{
 "" mouse mode (all modes)
 set mouse=a
@@ -64,17 +48,16 @@ set nomousefocus
 " hides mouse pointer in input mode
 set nomousehide
 "" }}}
-
+"" appearance {{{
 "" visual bell
 set vb t_vb=
-
+" }}}
 "" gvimrc_local.vim  {{{
-if 1 && filereadable($VIM . '/gvimrc_local.vim')
-  source $VIM/gvimrc_local.vim
-  if exists('g:gvimrc_local_finish') && g:gvimrc_local_finish != 0
-    finish
-  endif
+if filereadable(expand('~/.gvimrc.local'))
+  source ~/.gvimrc.local
+endif
+if filereadable(expand('~/_gvimrc_local'))
+  source ~/_gvimrc_local
 endif
 " }}}
 
-" vim: fileencoding=utf-8 foldmethod=marker
