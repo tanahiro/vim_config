@@ -3,7 +3,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2013-04-01
+" Last Change: 2013-04-07.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -128,6 +128,14 @@ if has('unix')
 endif
 " }}}
 " }}}
+"" local vimrc {{{
+if filereadable("~/.vimrc.local")
+  source ~/.vimrc.local
+endif
+if filereadable("~/_vimrc.local")
+  source ~/_vimrc.local
+endif
+" }}}
 
 "" vim-latex {{{
 let g:tex_flavor = "latex"
@@ -194,4 +202,7 @@ function! Syntaxhighlighter()
 endfunction
 inoremap SYNTAXH <C-R>=Syntaxhighlighter()<CR><ESC>
 "" }}}
+"" autodate {{{
+let autodate_format = '%Y-%m-%d'
+" }}}
 
