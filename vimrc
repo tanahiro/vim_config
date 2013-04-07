@@ -129,10 +129,10 @@ endif
 " }}}
 " }}}
 "" local vimrc {{{
-if filereadable("~/.vimrc.local")
+if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
-if filereadable("~/_vimrc.local")
+if filereadable(expand('~/_vimrc.local'))
   source ~/_vimrc.local
 endif
 " }}}
