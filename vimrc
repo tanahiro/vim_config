@@ -3,7 +3,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2013-04-07.
+" Last Change: 2013-04-18.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -191,7 +191,14 @@ au BufNewFile,BUfRead *.tex set textwidth=78
 map <leader>tt <Plug>VimwikiToggleListItem
 nmap <leader>wh <Plug>VimwikiAll2HTML
 noremap <Plug>VimwikiAll2HTML :VimwikiAll2HTML<CR>
-let g:vimwiki_folding = 1
+let g:vimwiki_folding = 'expr'
+let g:vimwiki_hl_headers = 1
+hi VimwikiHeader1 guifg=#AA0000
+hi VimwikiHeader2 guifg=#00AA00
+hi VimwikiHeader3 guifg=#0000AA
+hi VimwikiHeader4 guifg=#AA00AA
+hi VimwikiHeader5 guifg=#00AAAA
+hi VimwikiHeader6 guifg=#AAAA00
 "" }}}
 "" syntaxhighlighter {{{
 function! Syntaxhighlighter()
