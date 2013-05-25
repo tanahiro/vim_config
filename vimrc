@@ -3,7 +3,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2013-05-11.
+" Last Change: 2013-05-25.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -133,11 +133,14 @@ endif
 " }}}
 " }}}
 "" local vimrc {{{
-if filereadable(expand('~/.vimrc.local'))
-  source ~/.vimrc.local
-endif
-if filereadable(expand('~/_vimrc.local'))
-  source ~/_vimrc.local
+if has ("win32")
+  if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+  endif
+else
+  if filereadable(expand('~/_vimrc.local'))
+    source ~/_vimrc.local
+  endif
 endif
 " }}}
 
@@ -191,11 +194,14 @@ au BufNewFile,BUfRead *.tex set textwidth=78
 "" }}}
 "" vimwiki {{{
 "" path is defined in after/plugin/vimwiki.vim
-" Toggle list item on/off
+"" Toggles list item on/off
 map <leader>tt <Plug>VimwikiToggleListItem
+"" Generates HTML
 nmap <leader>wh <Plug>VimwikiAll2HTML
 noremap <Plug>VimwikiAll2HTML :VimwikiAll2HTML<CR>
+"" Folding
 let g:vimwiki_folding = 'expr'
+"" Headers
 let g:vimwiki_hl_headers = 1
 hi VimwikiHeader1 guifg=#AA0000
 hi VimwikiHeader2 guifg=#00AA00
@@ -203,6 +209,9 @@ hi VimwikiHeader3 guifg=#0000AA
 hi VimwikiHeader4 guifg=#AA00AA
 hi VimwikiHeader5 guifg=#00AAAA
 hi VimwikiHeader6 guifg=#AAAA00
+"" Valid HTML tags
+let g:vimwiki_valid_html =
+      \'b, i, s, u, sub, sup, kbd, br, hr, div, center, strong, em, span'
 "" }}}
 "" syntaxhighlighter {{{
 function! Syntaxhighlighter()
