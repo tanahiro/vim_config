@@ -134,12 +134,12 @@ endif
 " }}}
 "" local vimrc {{{
 if has ("win32")
-  if filereadable(expand('~/.vimrc.local'))
-    source ~/.vimrc.local
-  endif
-else
   if filereadable(expand('~/_vimrc.local'))
     source ~/_vimrc.local
+  endif
+else
+  if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
   endif
 endif
 " }}}
