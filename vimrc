@@ -3,7 +3,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2013-04-18.
+" Last Change: 2013-05-11.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -85,9 +85,13 @@ if &t_Co > 2 || has("gui_running")
   colorscheme tanahiro
 endif
 "" }}}
-"" other set options {{{
+"" search {{{
 "" seraches wrap around the end of the file
 set wrapscan
+set ignorecase
+set smartcase
+"" }}}
+"" other set options {{{
 "" do not make buckup file
 set nobackup
 ""}}}
