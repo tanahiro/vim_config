@@ -3,25 +3,32 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2013-05-25.
+" Last Change: 2014-04-26.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"" pathogen {{{
-"" 'runtimepath' is modified to include ~/.vim/bundle/*
-execute pathogen#infect()
-filetype plugin on
-" }}}
-"" encoding {{{
-set encoding=utf-8
-" }}}
+if has("win32")
+  let g:vim_home = expand("~/vimfiles/")
+else
+  let g:vim_home = expand("~/.vim/")
+endif
+
 "" mode {{{
+filetype plugin on
+syntax on
 "" Use Vim defaults
 set nocompatible
 "" read/write a .viminfo file, don't store more than 50 lines of registers
 set viminfo='20,<50
 "" keep 50 lines of command line history
 set history=50
+" }}}
+"" defautl macros {{{
+"" match with if/end
+runtime macros/matchit.vim
+" }}}
+"" encoding {{{
+set encoding=utf-8
 " }}}
 "" indent {{{
 filetype indent on
@@ -76,14 +83,17 @@ set formatoptions+=mM
 "" does not use octal format
 set nrformats-=octal
 ""}}}
+"" pathogen {{{
+"" 'runtimepath' is modified to include ~/.vim/bundle/*
+execute pathogen#infect()
+" }}}
 "" color {{{
-"" Switch syntax highlighting on, when the terminal has colors
 "" Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
   set hlsearch
   colorscheme tanahiro
 endif
+set incsearch
 "" }}}
 "" search {{{
 "" seraches wrap around the end of the file
@@ -94,6 +104,8 @@ set smartcase
 "" other set options {{{
 "" do not make buckup file
 set nobackup
+"" compelete
+set wildmode=list:longest
 ""}}}
 "" move {{{
 "" up-down motion on wraped lines
@@ -143,8 +155,17 @@ else
   endif
 endif
 " }}}
+"" tex and vim-latex {{{
+"" In text files, always limit the width of text to 78 characters
+au BufNewFile,BUfRead *.tex setlocal textwidth=78
+"" Spell check and word list
+au BufNewFile,BufRead *.tex setlocal spell
+if filereadable(expand(vim_home."spell/tex.utf-8.add"))
+  au BufNewFile,BufRead *.tex let &l:spellfile=vim_home.'spell/en.utf-8.add'
+  au BufNewFile,BufRead *.tex
+        \ let &l:spellfile.=','.vim_home.'spell/tex.utf-8.add'
+endif
 
-"" vim-latex {{{
 let g:tex_flavor = "latex"
 "" for windows user
 set shellslash
@@ -188,9 +209,6 @@ let g:Tex_IgnoredWarnings =
   "\'Citation %.%# undefined'
   "\'There were undefined references'."\n". 
 let g:Tex_IgnoreLevel = 13
-
-"" In text files, always limit the width of text to 78 characters
-au BufNewFile,BUfRead *.tex set textwidth=78
 "" }}}
 "" vimwiki {{{
 "" path is defined in after/plugin/vimwiki.vim
