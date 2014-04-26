@@ -243,4 +243,18 @@ inoremap SYNTAXH <C-R>=Syntaxhighlighter()<CR><ESC>
 "" autodate {{{
 let autodate_format = '%Y-%m-%d'
 " }}}
+"" evervim {{{
+if has("python")
+  nmap <silent> <Leader>el <Plug>EvervimNotebookList
+  noremap <Plug>EvervimNotebookList :EvervimNotebookList<CR>
+
+  nmap <silent> <Leader>et <Plug>EvervimListTags
+  noremap <Plug>EvervimListTags :EvervimListTags<CR>
+
+  nmap <silent> <Leader>ec <Plug>EvervimCreateNote
+  noremap <Plug>EvervimCreateNote :EvervimCreateNote<CR>
+
+  let g:evervim_splitoption=''
+endif
+" }}}
 
