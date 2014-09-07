@@ -214,7 +214,7 @@ hi! link Structure Type
 hi! link Typedef Type
 
 "" Search {{{1
-call <SID>set_clr("IncSearch", "", 11, "NONE")
+call <SID>set_clr("IncSearch", "", 11, "underline")
 call <SID>set_clr("Search",    "", 11, "NONE")
 
 "" Messages {{{1
