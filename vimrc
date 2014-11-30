@@ -3,7 +3,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2014-04-26.
+" Last Change: 2014-11-16.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -70,6 +70,8 @@ set titlestring=%f\ %M%(\ @%{hostname()}:%<%F%)
 set ruler
 "" bell
 set visualbell t_vb=
+"" multi-byte characters
+set ambiwidth=double
 "" }}}
 "" edit {{{
 "" allows backspacing over everything in insert mode
@@ -213,7 +215,7 @@ let g:Tex_IgnoreLevel = 13
 "" vimwiki {{{
 "" path is defined in after/plugin/vimwiki.vim
 "" Toggles list item on/off
-map <leader>tt <Plug>VimwikiToggleListItem
+map <leader>wtt <Plug>VimwikiToggleListItem
 "" Generates HTML
 nmap <leader>wh <Plug>VimwikiAll2HTML
 noremap <Plug>VimwikiAll2HTML :VimwikiAll2HTML<CR>
@@ -256,5 +258,21 @@ if has("python")
 
   let g:evervim_splitoption=''
 endif
+" }}}
+"" mmarkdown {{{
+let g:mmarkdown_viewer = "firefox"
+" }}}
+"" im_control {{{
+let IM_CtrlMode = 1
+
+function! IMCtrl(cmd)
+  let cmd = a:cmd
+  if cmd == 'On'
+    let res = system('ibus engine "mozc-jp"')
+  elseif cmd == 'Off'
+    let res = system('ibus engine "xkb:us::eng"')
+  endif
+  return ''
+endfunction
 " }}}
 
