@@ -3,7 +3,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2014-11-16.
+" Last Change: 2014-11-30.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -136,6 +136,9 @@ augroup Binary
   au BufWritePost *.bin if &bin | silent %!xxd -g 1
   au BufWritePost *.bin set nomod | endif
 augroup END
+" }}}
+" {{{ " buffer
+set hidden
 " }}}
 "" clipbaord {{{
 set clipboard+=unnamed
