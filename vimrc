@@ -257,4 +257,7 @@ if has("python")
   let g:evervim_splitoption=''
 endif
 " }}}
-
+"" spell check {{{
+au FileType gitcommit set spell
+au FileType markdown  set spell
+" }}}
