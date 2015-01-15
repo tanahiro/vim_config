@@ -9,7 +9,7 @@
 "" font {{{
 if has('win32')
   set guifont=Inconsolata:h11
-  set guifontwide=TakaoGothic:h11
+  set guifontwide=MigMix_1M:h10
 elseif has('gui_macvim')
   set guifont=Inconsolata:h12
   set guifontwide=Takaoゴシック:h11
