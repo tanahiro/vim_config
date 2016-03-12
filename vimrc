@@ -72,6 +72,8 @@ set ruler
 set visualbell t_vb=
 "" multi-byte characters
 set ambiwidth=double
+"" line at 80th char
+set colorcolumn=80
 "" }}}
 "" edit {{{
 "" allows backspacing over everything in insert mode
@@ -284,4 +286,6 @@ function! IMCtrl(cmd)
   return ''
 endfunction
 " }}}
-
+"" vim-easy-align {{{
+vmap <Enter> <Plug>(EasyAlign)
+" }}}
