@@ -3,7 +3,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2014-11-30.
+" Last Change: 2016-03-12.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -108,6 +108,8 @@ set smartcase
 set nobackup
 "" compelete
 set wildmode=list:longest
+"" do not create swap files
+set noswapfile
 ""}}}
 "" move {{{
 "" up-down motion on wraped lines
