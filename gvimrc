@@ -3,12 +3,12 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2013-04-01
+" Last Change: 2016-09-02.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" font {{{
 if has('win32')
-  set guifont=Inconsolata:h11
+  set guifont=Inconsolata:h10
   set guifontwide=MigMix_1M:h10
 elseif has('gui_macvim')
   set guifont=Inconsolata:h12
@@ -33,7 +33,8 @@ set cmdheight=1
 set guioptions-=T
 
 "" color
-colorscheme tanahiro
+set background=light
+colorscheme solarized
 
 "" transparency
 if has('gui_macvim')

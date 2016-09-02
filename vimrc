@@ -3,7 +3,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2016-03-12.
+" Last Change: 2016-09-02.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -95,7 +95,8 @@ execute pathogen#infect()
 "" Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   set hlsearch
-  colorscheme tanahiro
+  set background=light
+  colorscheme solarized
 endif
 set incsearch
 "" }}}
@@ -218,27 +219,6 @@ let g:Tex_IgnoredWarnings =
   "\'Citation %.%# undefined'
   "\'There were undefined references'."\n". 
 let g:Tex_IgnoreLevel = 13
-"" }}}
-"" vimwiki {{{
-"" path is defined in after/plugin/vimwiki.vim
-"" Toggles list item on/off
-map <leader>wtt <Plug>VimwikiToggleListItem
-"" Generates HTML
-nmap <leader>wh <Plug>VimwikiAll2HTML
-noremap <Plug>VimwikiAll2HTML :VimwikiAll2HTML<CR>
-"" Folding
-let g:vimwiki_folding = 'expr'
-"" Headers
-let g:vimwiki_hl_headers = 1
-hi VimwikiHeader1 guifg=#AA0000
-hi VimwikiHeader2 guifg=#00AA00
-hi VimwikiHeader3 guifg=#0000AA
-hi VimwikiHeader4 guifg=#AA00AA
-hi VimwikiHeader5 guifg=#00AAAA
-hi VimwikiHeader6 guifg=#AAAA00
-"" Valid HTML tags
-let g:vimwiki_valid_html =
-      \'b, i, s, u, sub, sup, kbd, br, hr, div, center, strong, em, span'
 "" }}}
 "" syntaxhighlighter {{{
 function! Syntaxhighlighter()
