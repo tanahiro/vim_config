@@ -3,7 +3,7 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2016-10-16.
+" Last Change: 2016-11-13.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -114,7 +114,7 @@ set wildmode=list:longest
 "" do not create swap files
 set noswapfile
 "" Fileformat of new buffer always unix
-set ffs=unix
+set ffs=unix,dos
 ""}}}
 "" move {{{
 "" up-down motion on wraped lines
