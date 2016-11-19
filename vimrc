@@ -3,16 +3,35 @@
 " vim: fileencoding=utf-8 foldmethod=marker
 "
 " Maintainer: Hiroyuki Tanaka <hryktnk@gmail.com>
-" Last Change: 2016-11-13.
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"" Dirs {{{
 if has("win32")
   let g:vim_home = expand("~/vimfiles/")
 else
   let g:vim_home = expand("~/.vim/")
 endif
 
+" }}}
+"" dein {{{
+let s:dein_dir = g:vim_home.'dein/'
+let g:vim_plugin_dir = g:vim_home.'dein/repos/'
+
+let &rtp .= ','.expand(s:dein_dir.'repos/dein.vim')
+
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  call dein#local(g:vim_plugin_dir)
+  call dein#local(g:vim_home.'local-plugins')
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+silent! execute 'helptags' s:dein_dir.'doc/'
+" }}}
 "" mode {{{
 filetype plugin on
 syntax on
@@ -46,9 +65,9 @@ set smartindent
 set softtabstop=2
 "" }}}
 "" appearance {{{
-"" shows line number
+"" if to show line number
 set nonumber
-"" shows <Tab> and end of line
+"" if to show <Tab> and end of line
 set nolist
 "" long lines wrap
 set wrap
@@ -87,10 +106,6 @@ set formatoptions+=mM
 "" does not use octal format
 set nrformats-=octal
 ""}}}
-"" pathogen {{{
-"" 'runtimepath' is modified to include ~/.vim/bundle/*
-execute pathogen#infect()
-" }}}
 "" color {{{
 "" Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
@@ -98,13 +113,13 @@ if &t_Co > 2 || has("gui_running")
   set background=light
   colorscheme solarized
 endif
-set incsearch
 "" }}}
 "" search {{{
 "" seraches wrap around the end of the file
 set wrapscan
 set ignorecase
 set smartcase
+set incsearch
 "" }}}
 "" other set options {{{
 "" do not make buckup file
