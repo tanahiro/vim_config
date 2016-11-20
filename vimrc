@@ -26,6 +26,10 @@ if dein#load_state(s:dein_dir)
   call dein#local(g:vim_plugin_dir)
   call dein#local(g:vim_home.'local-plugins')
 
+  if dein#check_install()
+    call dein#install()
+  endif
+
   call dein#end()
   call dein#save_state()
 endif
