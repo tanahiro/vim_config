@@ -115,6 +115,7 @@ set nrformats-=octal
 if &t_Co > 2 || has("gui_running")
   set hlsearch
   set background=light
+  let g:solarized_termtrans=1
   colorscheme solarized
 endif
 "" }}}
