@@ -153,15 +153,15 @@ if has("autocmd")
 endif
 " }}}
 "" vim -b : edit binary using xxd-format {{{
+"" :e ++bin or :e ++nobin
 augroup Binary
   au!
   au BufReadPre  *.bin let &bin=1
-  au BufReadPost *.bin if &bin | silent %!xxd -g 1
-  au BufReadPost *.bin set ft=xxd | endif
-  au BufWritePre *.bin if &bin | %!xxd -r
-  au BufWritePre *.bin endif
-  au BufWritePost *.bin if &bin | silent %!xxd -g 1
-  au BufWritePost *.bin set nomod | endif
+  au BufReadPost * if &bin | silent %!xxd -g 1
+  au BufReadPost * set ft=xxd | endif
+  au BufWritePre * if &bin | %!xxd -r | endif
+  au BufWritePost * if &bin | silent %!xxd -g 1
+  au BufWritePost * set nomod | endif
 augroup END
 " }}}
 " {{{ " buffer
