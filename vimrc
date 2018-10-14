@@ -159,7 +159,7 @@ augroup Binary
   au BufReadPre  *.bin let &bin=1
   au BufReadPost * if &bin | silent %!xxd -g 1
   au BufReadPost * set ft=xxd | endif
-  au BufWritePre * if &bin | %!xxd -r | endif
+  au BufWritePre * if &bin | %!xxd -r
   au BufWritePre * endif
   au BufWritePost * if &bin | silent %!xxd -g 1
   au BufWritePost * set nomod | endif
