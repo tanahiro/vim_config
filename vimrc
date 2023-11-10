@@ -97,6 +97,8 @@ set visualbell t_vb=
 set ambiwidth=double
 "" line at 80th char
 set colorcolumn=80
+"" Scroll with wrapped lines
+set smoothscroll
 "" }}}
 "" edit {{{
 "" allows backspacing over everything in insert mode
@@ -305,4 +307,11 @@ let g:syntastic_python_checkers = ["pylint"]
 
 nmap <silent> <Leader>ss <plug>SyntasticCheck
 noremap <Plug>SyntasticCheck :SyntasticCheck<CR>
-"}}}
+" }}}
+"" quickhl {{{
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+vmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
+" }}}
