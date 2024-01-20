@@ -14,27 +14,26 @@ else
 endif
 
 " }}}
-"" dein {{{
-let s:dein_dir = g:vim_home.'dein/'
-let g:vim_plugin_dir = g:vim_home.'dein/repos/'
-
-let &rtp .= ','.expand(s:dein_dir.'repos/dein.vim')
-
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-
-  call dein#local(g:vim_plugin_dir)
-  call dein#local(g:vim_home.'local-plugins')
-
-  if dein#check_install()
-    call dein#install()
-  endif
-
-  call dein#end()
-  call dein#save_state()
+"" jetpack {{{
+""" Automatic install
+let s:jetpackfile = expand('<sfile>:p:h') .. '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+if !filereadable(s:jetpackfile)
+  call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
 endif
 
-silent! execute 'helptags' s:dein_dir.'doc/'
+packadd vim-jetpack
+call jetpack#begin()
+Jetpack 'tani/vim-jetpack', {'opt': 1} "bootstrap"
+Jetpack 'tanahiro/vim_config'
+Jetpack 'altercation/vim-colors-solarized'
+Jetpack 't9md/vim-quickhl'
+Jetpack 'junegunn/vim-easy-align'
+Jetpack 'Vimjas/vim-python-pep8-indent'
+Jetpack 'editorconfig/editorconfig-vim'
+Jetpack 'rbtnn/vim-ambiwidth'
+call jetpack#end()
+
 " }}}
 "" mode {{{
 filetype plugin on
@@ -70,7 +69,7 @@ set softtabstop=2
 "" }}}
 "" appearance {{{
 "" if to show line number
-set nonumber
+set number
 "" if to show <Tab> and end of line
 set nolist
 "" long lines wrap
@@ -94,7 +93,7 @@ set ruler
 "" bell
 set visualbell t_vb=
 "" multi-byte characters
-set ambiwidth=double
+set ambiwidth=single
 "" line at 80th char
 set colorcolumn=80
 "" Scroll with wrapped lines
@@ -122,10 +121,13 @@ if &t_Co > 2 || has("gui_running")
 endif
 "" }}}
 "" search {{{
-"" seraches wrap around the end of the file
+"" Seraches wrap around the end of the file
 set wrapscan
+"" Ignore case in search pattern
 set ignorecase
+"" Override the 'ignorecase' option if the search pattern contains upper case
 set smartcase
+"" While typing a search command, show where the pattern, as it was typed
 set incsearch
 "" }}}
 "" other set options {{{
