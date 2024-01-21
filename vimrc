@@ -6,6 +6,9 @@
 " License: Public Domain   
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"" Constants {{{
+const has_deno = executable('deno')
+" }}}
 "" Dirs {{{
 if has("win32")
   let g:vim_home = expand("~/vimfiles/")
@@ -26,14 +29,52 @@ packadd vim-jetpack
 call jetpack#begin()
 Jetpack 'tani/vim-jetpack', {'opt': 1} "bootstrap"
 Jetpack 'tanahiro/vim_config'
+" color scheme
 Jetpack 'altercation/vim-colors-solarized'
+" Quick highlight
 Jetpack 't9md/vim-quickhl'
+" Align
 Jetpack 'junegunn/vim-easy-align'
+" python syntax
 Jetpack 'Vimjas/vim-python-pep8-indent'
+" editorconfig (pip install editorconfig)
 Jetpack 'editorconfig/editorconfig-vim'
+" width of amibiguous width
 Jetpack 'rbtnn/vim-ambiwidth'
+" Language Server Protocol
+Jetpack 'prabirshrestha/vim-lsp'
+" Language Server Protocol
+Jetpack 'mattn/vim-lsp-settings'
+" VSCode(LSP)'s snippet feature in vim
+Jetpack 'hrsh7th/vim-vsnip'
+
+if has_deno
+  " deno binding
+  Jetpack 'vim-denops/denops.vim'
+  " Dark powered completion
+  Jetpack 'Shougo/ddc.vim'
+  Jetpack 'Shougo/ddc-ui-native'
+  Jetpack 'Shougo/ddc-source-around'
+  Jetpack 'Shougo/ddc-filter-sorter_rank'
+  Jetpack 'Shougo/ddc-source-lsp'
+  Jetpack 'tani/ddc-fuzzy'
+  Jetpack 'LumaKernel/ddc-source-file'
+  Jetpack 'uga-rosa/ddc-source-vsnip'
+endif
+
+" Load local plugins
+if filereadable(expand('~/.vimplugins.local.toml'))
+  call jetpack#load_toml(expand('~/.vimplugins.local.toml'))
+endif
 call jetpack#end()
 
+" Sync if necessary
+for name in jetpack#names()
+  if !jetpack#tap(name)
+    call jetpack#sync()
+    break
+  endif
+endfor
 " }}}
 "" mode {{{
 filetype plugin on
@@ -117,7 +158,7 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
   set background=light
   let g:solarized_termtrans=1
-  colorscheme solarized
+  silent! colorscheme solarized
 endif
 "" }}}
 "" search {{{
@@ -146,14 +187,23 @@ map <Up> gk
 map <Down> gj
 imap <Up> <Esc>gka
 imap <Down> <Esc>gja
+
+"" move in ex mode
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Del>
 " }}}
 "" some convinient features {{{
 "" When editing a file, always jump to the last cursor position
 if has("autocmd")
   autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal! g'\"" |
-  \ endif
+        \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+        \   exe "normal! g'\"" |
+        \ endif
 endif
 " }}}
 "" vim -b : edit binary using xxd-format {{{
@@ -317,3 +367,54 @@ vmap <Space>m <Plug>(quickhl-manual-this)
 nmap <Space>M <Plug>(quickhl-manual-reset)
 xmap <Space>M <Plug>(quickhl-manual-reset)
 " }}}
+"" LSP Language Server Protocol {{{
+"" LSP message only appears in the command window
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
+
+nmap <Leader>ll <plug>(lsp-document-diagnostics)
+nmap <Leader>ln <plug>(lsp-next-diagnostic)
+nmap <Leader>lp <plug>(lsp-previous-diagnostic)
+nmap <Leader>lh <plug>(lsp-hover-float)
+
+let g:lsp_settings_filetype_ruby = 'solargraph'
+" }}}
+"" ddc / completion {{{
+"" Completion only used when deno is installed
+if has_deno
+  call ddc#custom#patch_global('ui', 'native')
+
+  call ddc#custom#patch_global('sources', ['around', 'lsp', 'file'])
+
+  call ddc#custom#patch_global('sourceOptions', #{
+        \   _: #{
+        \     matchers: ['matcher_fuzzy'],
+        \     sorters: ['sorter_fuzzy'],
+        \     converters: ['converter_fuzzy'],
+        \   },
+        \   around: #{ mark: 'A' },
+        \   lsp: #{
+        \     mark: 'lsp',
+        \     forceCompletionPattern: '\.\w*|:\w*|->\w*',
+        \   },
+        \   file: #{
+        \     mark: 'F',
+        \     isVolatile: v:true,
+        \     forceCompletionPattern: '\S/\S*',
+        \   },
+        \ })
+
+  call ddc#custom#patch_global('sourceParams', #{
+        \   around: #{ maxSize: 100 },
+        \   lsp: #{
+        \     lspEngine: 'vim-slp',
+        \     snippetEngine: denops#callback#register({
+        \           body -> vsnip#anonymous(body)
+        \     }),
+        \     enableResolveItem: v:true,
+        \     enableAdditionalTextEdit: v:true,
+        \   },
+        \ })
+endif
+" }}}
+
