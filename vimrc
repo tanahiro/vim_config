@@ -138,7 +138,7 @@ set ambiwidth=single
 "" line at 80th char
 set colorcolumn=80
 "" Scroll with wrapped lines
-set smoothscroll
+silent! set smoothscroll
 "" }}}
 "" edit {{{
 "" allows backspacing over everything in insert mode
