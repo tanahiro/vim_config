@@ -89,6 +89,9 @@ set history=50
 "" defautl macros {{{
 "" match with if/end
 runtime macros/matchit.vim
+"" modeline
+set modeline
+set modelines=5
 " }}}
 "" encoding {{{
 set encoding=utf-8
